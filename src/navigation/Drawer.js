@@ -10,13 +10,13 @@ import Home from '../screens/Home';
 import About from '../screens/About';
 import Settings from '../screens/Settings';
 import Animated from 'react-native-reanimated';
-
+import LinearGradient from 'react-native-linear-gradient';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const DrawerContent = (props) => {
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} scrollEnabled={false}>
       <DrawerItem
         label="Home"
         onPress={() => props.navigation.navigate('Home')}
@@ -34,7 +34,7 @@ const DrawerContent = (props) => {
 };
 const Screens = ({navigation, style}) => {
   return (
-    <Animated.View style={[{flex: 1}, style]}>
+    <Animated.View style={[styles.stack, style]}>
       <Stack.Navigator
         screenOptions={{
           headerTransparent: true,
@@ -58,18 +58,55 @@ export default () => {
     inputRange: [0, 1],
     outputRange: [1, 0.8],
   });
-  const screenStyles = {transform: [{scale}]};
+  const borderRadius = Animated.interpolate(progress, {
+    inputRange: [0, 1],
+    outputRange: [0, 10],
+  });
+  const animatedStyle = {borderRadius, transform: [{scale}]};
   return (
-    <Drawer.Navigator
-      initialRouteName="Home"
-      drawerContent={(props) => {
-        setProgress(props.progress);
-        return <DrawerContent {...props} />;
-      }}>
-      <Drawer.Screen name="Screens">
-        {(props) => <Screens {...props} style={screenStyles} />}
-      </Drawer.Screen>
-    </Drawer.Navigator>
+    <LinearGradient style={styles.container} colors={['red', 'blue']}>
+      <Drawer.Navigator
+      backBehavior='none'
+        initialRouteName="Home"
+        drawerType="slide"
+        overlayColor="transparent"
+        drawerStyle={styles.drawerStyles}
+        contentContainerStyle={styles.container}
+        drawerContentOptions={{
+          activeBackgroundColor: 'transparent',
+          activeTintColor: 'white',
+          inactiveTintColor: 'white',
+        }}
+        sceneContainerStyle={styles.scene}
+        drawerContent={(props) => {
+          setProgress(props.progress);
+          return <DrawerContent {...props} />;
+        }}>
+        <Drawer.Screen name="Screens">
+          {(props) => <Screens {...props} style={animatedStyle} />}
+        </Drawer.Screen>
+      </Drawer.Navigator>
+    </LinearGradient>
   );
 };
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scene: {
+    backgroundColor: 'transparent',
+  },
+  stack: {
+    flex: 1,
+    shadowColor: '#FFF',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    elevation: 5,
+    overflow: 'hidden',
+  },
+  drawerStyles: {flex: 1, width: '50%', backgroundColor: 'transparent'},
+});
