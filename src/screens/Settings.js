@@ -5,7 +5,7 @@ export default class Settings extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Text> Settings Screen </Text>
+        <Text style={styles.txt}> Settings Screen </Text>
       </View>
     );
   }
@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fcba03',
+    backgroundColor: '#50e339',
+  },
+  txt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica',
   },
 });

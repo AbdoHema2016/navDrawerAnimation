@@ -5,7 +5,7 @@ export default class About extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Text> About Screen </Text>
+        <Text style={styles.txt}> About Screen </Text>
       </View>
     );
   }
@@ -17,5 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#e303fc',
+  },
+  txt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica',
   },
 });

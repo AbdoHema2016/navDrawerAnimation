@@ -5,7 +5,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.Container}>
-        <Text> Home Screen </Text>
+        <Text style={styles.txt}> Home Screen </Text>
       </View>
     );
   }
@@ -17,5 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#03dffc',
+  },
+  txt: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica',
   },
 });

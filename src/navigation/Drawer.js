@@ -19,14 +19,17 @@ const DrawerContent = (props) => {
     <DrawerContentScrollView {...props} scrollEnabled={false}>
       <DrawerItem
         label="Home"
+        labelStyle={styles.drawerLblStyle}
         onPress={() => props.navigation.navigate('Home')}
       />
       <DrawerItem
         label="About"
+        labelStyle={styles.drawerLblStyle}
         onPress={() => props.navigation.navigate('About')}
       />
       <DrawerItem
         label="Settings"
+        labelStyle={styles.drawerLblStyle}
         onPress={() => props.navigation.navigate('Settings')}
       />
     </DrawerContentScrollView>
@@ -41,7 +44,10 @@ const Screens = ({navigation, style}) => {
           headerTitle: null,
           headerLeft: () => (
             <TouchableOpacity onPress={navigation.openDrawer}>
-              <Text>Menu</Text>
+              <Image
+                source={require('../../assets/menu.png')}
+                style={styles.menu}
+              />
             </TouchableOpacity>
           ),
         }}>
@@ -64,9 +70,9 @@ export default () => {
   });
   const animatedStyle = {borderRadius, transform: [{scale}]};
   return (
-    <LinearGradient style={styles.container} colors={['red', 'blue']}>
+    <LinearGradient style={styles.container} colors={['#d303fc', '#0384fc']}>
       <Drawer.Navigator
-      backBehavior='none'
+        backBehavior="none"
         initialRouteName="Home"
         drawerType="slide"
         overlayColor="transparent"
@@ -94,6 +100,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scene: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+
+    elevation: 24,
     backgroundColor: 'transparent',
   },
   stack: {
@@ -109,4 +124,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   drawerStyles: {flex: 1, width: '50%', backgroundColor: 'transparent'},
+  menu: {
+    width: 38,
+    height: 38,
+    margin: 20,
+  },
+  drawerLblStyle: {
+    fontWeight: '500',
+    fontSize: 20,
+  },
 });
